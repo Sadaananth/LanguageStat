@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 {
 	init_all();
 	start_activity();
+	finish_activity();
 	printf("\n");
 	return 0;
 }

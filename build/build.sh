@@ -8,7 +8,7 @@ CMAKE_LISTS_PATH="../"
 
 clean_all()
 {
-	./clean
+	sh clean.sh
 }
 
 build_all()

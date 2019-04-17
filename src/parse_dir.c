@@ -16,12 +16,10 @@
  * store absolute pathname of directory to get stats
  * */
 static char native_directory[150];
-static char current_directory[500];
 
 void init_dir_core()
 {
 	memset( &native_directory[0], 0, sizeof(native_directory));
-	memset( &current_directory[0], 0, sizeof(current_directory));
 	get_current_directory();
 }
 
@@ -43,13 +41,15 @@ void get_folder_content(const char* folder_name)
 {
 	DIR *directory;
 	struct dirent* dir_content;
+	char current_directory[500];
 	
-	memcpy( &current_directory[0], folder_name, strlen(folder_name) );
+	(void)memset( &current_directory[0], 0, sizeof(current_directory) );
+	(void)memcpy( &current_directory[0], folder_name, strlen(folder_name) );
 	
 	directory = opendir(folder_name);
 	if(directory != NULL)
 	{	
-		printf("\nFolder %s is not empty ", folder_name);
+		
 		while( NULL != ( dir_content = readdir(directory) ) )
 		{
 			if( DT_DIR == dir_content->d_type )
@@ -57,20 +57,31 @@ void get_folder_content(const char* folder_name)
 				if( ( 0 != strcmp( PARENT_DIR_SHORT, dir_content->d_name )  ) && 
 				( 0 != strcmp( CURRENT_DIR_SHORT, dir_content->d_name )  ) )
 				{
-					printf("\nanother directory found %s", dir_content->d_name);
-					get_folder_content( dir_content->d_name );
+					
+					current_directory[strlen(folder_name)] = '/';
+					(void)memcpy( &current_directory[strlen(folder_name) + 1], dir_content->d_name, strlen( dir_content->d_name) );
+					
+					get_folder_content( current_directory );
+					(void)memset( &current_directory[strlen(folder_name) + 1], 0, strlen( dir_content->d_name));
+				}
+				else
+				{
+					/** 
+					 * Shortcut . or ..  read 
+					 * */
 				}
 			}
 			else if( DT_REG == dir_content->d_type )
 			{
-				printf("\nFile found %s", dir_content->d_name);
 				update_file_type( current_directory, dir_content->d_name);
 			}
 		}
 	}
 	else
 	{
-		printf("\nEmpty folder %s", folder_name);
+		/**
+		 * Folder is empty 
+		 * */
 	}
 }
 
