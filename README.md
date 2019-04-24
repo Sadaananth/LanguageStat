@@ -6,14 +6,14 @@ LanguageStats is a simpler application to measure the percentage of programming 
 How to Use:
 =============
 
-	* Fork or Clone the repository to Local Machine
-	* Move to Folder `build`
-	* Run command
+1.Fork or Clone the repository to Local Machine
+2. Move to Folder `build`
+3. Run command
 		```
 		"sh build.sh"
 		```
-	* Binary `LanguageStats` will be generated in `build\bin` folder
-	* Run command
+4. Binary `LanguageStats` will be generated in `build\bin` folder
+5. Run command
 		```
 		"./LanguageStats"
 		```
