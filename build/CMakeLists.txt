@@ -19,6 +19,7 @@ if(UNIX AND NOT APPLE)
 		${SOURCE_PATH}parse_dir.c
 		${SOURCE_PATH}updatelang.c
 		${SOURCE_PATH}logger.c
+		${SOURCE_PATH}presenter.c
 	)
 	
 	add_executable( ${PROJECT} ${SOURCES}  )

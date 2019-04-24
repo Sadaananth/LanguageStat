@@ -11,6 +11,6 @@ int main(int argc, char** argv)
 	init_all();
 	start_activity();
 	finish_activity();
-	printf("\n");
+	printf("\x1b[39m\n");
 	return 0;
 }

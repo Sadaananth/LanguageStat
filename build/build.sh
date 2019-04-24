@@ -6,9 +6,14 @@ SRC_FOLDER="./src"
 BIN_NAME="LanguageStat"
 CMAKE_LISTS_PATH="../"
 
-clean_all()
+clean_pre_build()
 {
-	sh clean.sh
+	sh clean.sh "ALL"
+}
+
+clean_post_build()
+{
+	sh clean.sh "OBJ"
 }
 
 build_all()
@@ -27,9 +32,10 @@ move_bin()
 
 main()
 {
-	clean_all
+	clean_pre_build
 	build_all
 	move_bin
+	clean_post_build
 }
 
 main

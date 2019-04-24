@@ -6,19 +6,8 @@
 #include <errno.h> /* to check error status set by gnu library calls */
 
 #include "updatelang.h" /* Internal header to declare functions defined in this file */
-
-typedef struct 
-{
-	unsigned long long total_size;
-	unsigned long long c_size;
-	unsigned long long cpp_size;
-	unsigned long long sh_size;
-	unsigned long long py_size;
-	unsigned long long pl_size;
-	unsigned long long java_size;
-	unsigned long long html_size;
-	unsigned long long css_size;
-}project_stat_t;
+#include "user_types.h"	/* Header to declare common user defined types */
+#include "presenter.h" /* Header to call presenter functions */
 
 typedef  struct
 {
@@ -44,7 +33,22 @@ static lang_key_hashtable_t lang_key_hashtable[] =
 };
 
 static unsigned int hastable_size = sizeof(lang_key_hashtable) / sizeof(lang_key_hashtable_t);
-static project_stat_t project_stat = { 0 };
+
+project_stat_t project_stat = {
+		0,
+		{ 0, 0.0, "C", '\0', Yellow },
+		{ 0, 0.0, "C++", '\0', Blue },
+		{ 0, 0.0, "Shell" , '\0', Green },
+		{ 0, 0.0, "Python", '\0', Magenta },
+		{ 0, 0.0, "Perl", '\0',  Red },
+		{ 0, 0.0, "Java", '\0', Cyan },
+		{ 0, 0.0, "HTML", '\0', LightYellow },
+		{ 0, 0.0, "CSS", '\0', LightBlue },
+};
+
+static unsigned int getlanguage_key(const char* extension);
+static void update_parsed_stat( const char* file_extension, unsigned int extn_length, unsigned int file_size);
+static void calculate_percent(void);
 
 unsigned int getlanguage_key(const char* extension)
 {
@@ -71,42 +75,42 @@ static void update_parsed_stat( const char* file_extension, unsigned int extn_le
 	switch( getlanguage_key( extension ) )
 	{
 		case 0:
-			project_stat.c_size = project_stat.c_size + (unsigned long long)file_size;
+			project_stat.c_stat.size = project_stat.c_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 			
 		case 1:
-			project_stat.cpp_size = project_stat.cpp_size + (unsigned long long)file_size;
+			project_stat.cpp_stat.size = project_stat.cpp_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 		
 		case 2:
-			project_stat.py_size = project_stat.py_size + (unsigned long long)file_size;
+			project_stat.py_stat.size = project_stat.py_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 						
 		case 3:
-			project_stat.pl_size = project_stat.pl_size + (unsigned long long)file_size;
+			project_stat.pl_stat.size = project_stat.pl_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 						
 		case 4:
-			project_stat.java_size = project_stat.java_size + (unsigned long long)file_size;
+			project_stat.java_stat.size = project_stat.java_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 												
 		case 5:
-			project_stat.html_size = project_stat.html_size + (unsigned long long)file_size;
+			project_stat.html_stat.size = project_stat.html_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 						
 		case 6:
-			project_stat.sh_size = project_stat.sh_size + (unsigned long long)file_size;
+			project_stat.sh_stat.size = project_stat.sh_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 									
 		case 7:
-			project_stat.css_size = project_stat.css_size + (unsigned long long)file_size;
+			project_stat.css_stat.size = project_stat.css_stat.size + (unsigned long long)file_size;
 			project_stat.total_size = project_stat.total_size + (unsigned long long)file_size;
 			break;
 						
@@ -114,6 +118,19 @@ static void update_parsed_stat( const char* file_extension, unsigned int extn_le
 			break;
 	}
 	free(extension);
+}
+
+static void calculate_percent()
+{
+	lang_stat_t* parse_ptr = &project_stat.c_stat;
+	lang_stat_t* end_ptr = &project_stat.css_stat;
+	
+	while( parse_ptr <= end_ptr )
+	{
+		parse_ptr->percent = (double)parse_ptr->size / (double)project_stat.total_size;
+		parse_ptr->percent = parse_ptr->percent * 100;
+		parse_ptr++;
+	}
 }
 
 void update_file_type(const char* folder, const char* file_name)
@@ -157,14 +174,6 @@ void update_file_type(const char* folder, const char* file_name)
 
 void finish_activity()
 {
-	printf("\nConsolidated Values ");
-	printf("\nTotal Size in bytes : %llu", project_stat.total_size );
-	printf("\nC Size in bytes : %llu", project_stat.c_size );
-	printf("\nCPP Size in bytes : %llu", project_stat.cpp_size );
-	printf("\nsh Size in bytes : %llu", project_stat.sh_size );
-	printf("\nPython Size in bytes : %llu", project_stat.py_size );
-	printf("\nPerl Size in bytes : %llu", project_stat.pl_size );
-	printf("\nHTML Size in bytes : %llu", project_stat.html_size );
-	printf("\nJava Size in bytes : %llu", project_stat.java_size );
-	printf("\nCSS Size in bytes : %llu", project_stat.css_size );
+	calculate_percent();
+	present_output();
 }
