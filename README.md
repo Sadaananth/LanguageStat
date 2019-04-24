@@ -7,12 +7,15 @@ How to Use:
 =============
 
 1.Fork or Clone the repository to Local Machine
+
 2. Move to Folder `build`
+
 3. Run command
 		```
 		"sh build.sh"
 		```
 4. Binary `LanguageStats` will be generated in `build\bin` folder
+
 5. Run command
 		```
 		"./LanguageStats"
