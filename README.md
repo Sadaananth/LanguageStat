@@ -6,7 +6,7 @@ LanguageStats is a simpler application to measure the percentage of programming 
 How to Use:
 =============
 
-1.Fork or Clone the repository to Local Machine
+1. Fork or Clone the repository to Local Machine
 
 2. Move to Folder `build`
 
