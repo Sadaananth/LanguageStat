@@ -37,6 +37,8 @@ typedef struct
 	lang_stat_t java_stat;
 	lang_stat_t html_stat;
 	lang_stat_t css_stat;
+	lang_stat_t make_stat;
+	lang_stat_t cmake_stat;
 }project_stat_t;
 
 

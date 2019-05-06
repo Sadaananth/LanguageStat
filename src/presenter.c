@@ -8,7 +8,7 @@ extern project_stat_t project_stat;
 void present_output()
 {	
 	lang_stat_t* parse_ptr = &project_stat.c_stat;
-	lang_stat_t* end_ptr = &project_stat.css_stat;
+	lang_stat_t* end_ptr = &project_stat.cmake_stat;
 	unsigned int ret_val = 0;
 	unsigned int index = 0;
 	float others = 0.0f;
@@ -20,7 +20,7 @@ void present_output()
 		{
 			printf("%s",parse_ptr->color);
 			ret_val = printf("%s",parse_ptr->lang_name);
-			for( index = 0; index < ( 10 - ret_val ) ; index++ )
+			for( index = 0; index < ( 20 - ret_val ) ; index++ )
 			{
 				printf(" ");
 			}
@@ -42,7 +42,7 @@ void present_output()
 	{
 		printf("%s",LightGray);
 		ret_val = printf("Others");
-		for( index = 0; index < ( 10 - ret_val ) ; index++ )
+		for( index = 0; index < ( 20 - ret_val ) ; index++ )
 		{
 			printf(" ");
 		}
