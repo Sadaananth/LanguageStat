@@ -24,14 +24,17 @@ How to Use:
 Accuracy:
 =========
 
-Accuracy of this Application is on par with github language percentage calculator. 
-One can verify by comparing the Output.PNG and git's own language percentage for this repo.
+	Accuracy of this Application is on par with github language percentage calculator. One can verify by comparing the Output.PNG and git's own language percentage for this repo.
 
 TechnicalNotes:
 ===============
 
 	* Currently Supports Only Unix Variant Systems. 
 	* Coloring Works only with Terminal that supports ANSI Escape codes.
+	
+Contributions:
+=============
+	Contributions are welcomed and encouraged. It's just 5 files, Contributors are allow to modify in whatever way they want to produce a good and nice output.
 	
 ThanksNotes:
 =============
