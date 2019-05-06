@@ -21,6 +21,12 @@ How to Use:
 		"./LanguageStats"
 		```
 
+Accuracy:
+=========
+
+Accuracy of this Application is on par with github language percentage calculator. 
+One can verify by comparing the Output.PNG and git's own language percentage for this repo.
+
 TechnicalNotes:
 ===============
 
