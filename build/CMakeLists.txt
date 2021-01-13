@@ -1,4 +1,5 @@
 #only Supports Unix Variants
+cmake_minimum_required(VERSION 3.8)
 if(UNIX AND NOT APPLE)
 	set (PROJECT LanguageStat)
 	project (${PROJECT})
