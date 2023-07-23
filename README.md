@@ -1,26 +1,6 @@
-Welcome Everyone!!!
+## Language statistics calculator
+Self project to show programming languages used in the repo.
 
-LanguageStats is a simpler application to measure the percentage of programming languages used in a project. LanguageStats simply parse through the folder and calculate percentage of Language specific files. It currently supports C, C++, Python, Perl, HTML, CSS and Java. Planned activities can be found in `steps` file in the native directory.
-
-
-## How to Use:
-* Fork or Clone the repository to Local Machine.
-* Move to Folder `build`.
-* Run command `sh build.sh`.
-* Binary `LanguageStats` will be generated in `build\bin` folder.
-* Run command `./LanguageStats`
-
-## Accuracy:
-Accuracy of this Application is on par with github language percentage calculator. One can verify by comparing the Output.PNG and git's own language percentage for this repo.
-
-## TechnicalNotes:
-* Currently Supports Only Unix Variant Systems. 
-* Coloring Works only with Terminal that supports ANSI Escape codes.
-	
-## Contributions:
-Contributions are welcomed and encouraged. It's just 5 files, Contributors are allow to modify in whatever way they want to produce a good and nice output.
-	
-## ThanksNotes:
-Thanks for the guy who has the nice heart to consider this application. Feel free to contact me ananth.anbucheliyan@gmail.com
-
-
+## How to compile and run
+* Open terminal and run command `cmake -Bbuild .; cd build; make -j$(nproc)`.
+* By now executable should be ready. Now run using the following command `./LanguageStat`

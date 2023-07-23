@@ -1,7 +1,0 @@
-Planned Activities
-*************************
-1. Support other scripts like Cmake, Make, matlab code, capl etc.
-2. Decrease the code exection time 
-3. Support other OS and other FileSystems.
-4. Develop Output Graph or some cool ui to display output we got 
-5. Add support for apt repo
